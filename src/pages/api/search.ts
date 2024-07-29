@@ -1,9 +1,10 @@
+import { PostType } from "@/types/post";
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
-import { PostType } from "@/types/post";
+import { postsDataCache } from "@/cache/data";
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,6 +13,7 @@ export default async function handler(
   let posts;
   if (process.env.NODE_ENV === "production") {
     // @todo
+    posts = postsDataCache;
   } else {
     const files = fs.readdirSync(path.join("src/pages/posts"));
     posts = files.map((filename) => {
@@ -26,7 +28,6 @@ export default async function handler(
       };
     });
   }
-  console.log(posts);
 
   const results = posts!.filter(
     ({ frontmatter: { title, excerpt, category } }) =>

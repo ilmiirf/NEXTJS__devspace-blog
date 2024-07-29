@@ -1,6 +1,6 @@
 export interface FrontmatterType {
   title: string;
-  date: Date;
+  date: string;
   excerpt: string;
   cover_image: string;
   category: string;
