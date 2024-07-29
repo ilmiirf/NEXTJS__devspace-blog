@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Header from "./Header";
+import Search from "./Search";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -19,6 +20,7 @@ const Layout = ({ children, title, keywords, description }: LayoutProps) => {
       </Head>
 
       <Header />
+      <Search />
       <main className="container mx-auto my-7 text-gray-900 ">{children}</main>
     </div>
   );
